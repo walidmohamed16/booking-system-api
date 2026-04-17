@@ -1,5 +1,3 @@
-// src/app.js
-
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -11,6 +9,8 @@ const ApiError = require('./utils/apiError');
 const authRoutes = require('./routes/authRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const availabilityRoutes = require('./routes/availabilityRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(morgan('dev'));
 app.get('/', (req, res) => {
   res.json({
     status: 'success',
-    message: ' Booking System API is running!'
+    message: '🚀 Booking System API is running!'
   });
 });
 
@@ -32,6 +32,8 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/availability', availabilityRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Handle undefined routes
 app.use((req, res, next) => {
