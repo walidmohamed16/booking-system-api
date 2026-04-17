@@ -1,3 +1,12 @@
+const {
+  sendNewBookingToProvider,
+  sendNewBookingToClient,
+  sendBookingConfirmed,
+  sendBookingCancelled,
+  sendBookingRescheduled,
+  sendBookingCompleted
+} = require('../utils/email');
+
 const Booking = require('../models/Booking');
 const Service = require('../models/Service');
 const Availability = require('../models/Availability');
@@ -109,6 +118,9 @@ exports.createBooking = async (req, res, next) => {
       .populate('client', 'name email phone')
       .populate('provider', 'name email phone')
       .populate('service', 'name duration price');
+    // 11. Send emails ✉️
+    await sendNewBookingToProvider(populatedBooking);
+    await sendNewBookingToClient(populatedBooking);
 
     res.status(201).json({
       status: 'success',
@@ -256,6 +268,8 @@ exports.confirmBooking = async (req, res, next) => {
       .populate('client', 'name email phone')
       .populate('provider', 'name email phone')
       .populate('service', 'name duration price');
+    // Send email ✉️
+    await sendBookingConfirmed(populatedBooking);  
 
     res.status(200).json({
       status: 'success',
@@ -300,6 +314,8 @@ exports.cancelBooking = async (req, res, next) => {
       .populate('service', 'name duration price')
       .populate('cancelledBy', 'name');
 
+    // Send email ✉️
+    await sendBookingCancelled(populatedBooking, req.user.name);
     res.status(200).json({
       status: 'success',
       message: 'Booking cancelled successfully',
@@ -335,7 +351,9 @@ exports.completeBooking = async (req, res, next) => {
       .populate('provider', 'name email phone')
       .populate('service', 'name duration price');
 
-    res.status(200).json({
+    // Send email ✉️
+    await sendBookingCompleted(populatedBooking);
+      res.status(200).json({
       status: 'success',
       message: 'Booking completed successfully',
       data: { booking: populatedBooking }
@@ -435,7 +453,8 @@ exports.rescheduleBooking = async (req, res, next) => {
       .populate('client', 'name email phone')
       .populate('provider', 'name email phone')
       .populate('service', 'name duration price');
-
+    // Send email ✉️
+    await sendBookingRescheduled(populatedBooking, req.user.name);
     res.status(200).json({
       status: 'success',
       message: 'Booking rescheduled successfully',

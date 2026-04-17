@@ -1,9 +1,12 @@
+// src/app.js
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const errorHandler = require('./middlewares/errorHandler');
 const ApiError = require('./utils/apiError');
+const { apiLimiter, authLimiter } = require('./middlewares/rateLimiter');
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
@@ -20,11 +23,15 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan('dev'));
 
+// Rate Limiting
+app.use('/api', apiLimiter);
+app.use('/api/auth', authLimiter);
+
 // Test Route
 app.get('/', (req, res) => {
   res.json({
     status: 'success',
-    message: '🚀 Booking System API is running!'
+    message: 'Booking System API is running!'
   });
 });
 
