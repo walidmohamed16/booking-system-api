@@ -84,55 +84,6 @@ A RESTful API for managing appointments and bookings between service providers a
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/booking-system-api.git
-cd booking-system-api
-
-2. Install dependencies
-```bash
-npm install
-
-3.Set up environment variables
-```bash
-cp .env.example .env
-Edit .env with your values:
-env
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/booking-system
-JWT_SECRET=your_secret_key
-JWT_EXPIRES_IN=7d
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_app_password
-EMAIL_FROM=Booking System <your_email@gmail.com>
-
-4.Run the server
-
-bash
-# Development
-npm run dev
-
-# Production
-npm start
-
-
-📊 Database Models
-
-User → Service → Availability
-  ↓                    ↓
-  ↓              Available Slots
-  ↓                    ↓
-  └──→ Booking ←───────┘
-         ↓
-       Review
-
-🔒 Security Features
-JWT Authentication
-Password Hashing (bcrypt)
-Rate Limiting
-Helmet Security Headers
-CORS Configuration
-Input Validation
 Role-Based Authorization
 👨‍💻 Author
 Your walidmohamed16 - GitHub       
