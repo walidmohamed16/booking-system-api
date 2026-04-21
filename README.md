@@ -117,7 +117,7 @@ npm start
 ```
 
 📊 Database Models
-
+```text
 User → Service → Availability
   ↓                    ↓
   ↓              Available Slots
@@ -125,14 +125,67 @@ User → Service → Availability
   └──→ Booking ←───────┘
          ↓
        Review
-
+```
 🔒 Security Features
-JWT Authentication
-Password Hashing (bcrypt)
-Rate Limiting
-Helmet Security Headers
-CORS Configuration
-Input Validation
-Role-Based Authorization
+
+
+✅ JWT Authentication
+
+✅ Password Hashing (bcrypt)
+
+✅ Rate Limiting (100 req/15min)
+
+✅ Auth Rate Limiting (10 req/15min)
+
+✅ Helmet Security Headers
+
+✅ CORS Configuration
+
+✅ Input Validation (Joi)
+
+✅ Role-Based Authorization
+
+📧 Email Notifications
+
+
+Event	             Client	Provider
+
+New Booking	         ✅	    ✅
+
+Booking Confirmed	   ✅   	❌
+
+Booking Cancelled    ✅   	✅
+
+Booking Rescheduled	 ✅	    ✅
+
+Booking Completed    ✅	    ❌
+
+🧪 Testing with Postman
+
+
+Register a Provider account
+
+Login and copy the token
+
+Create a Service
+
+Set Availability schedule
+
+Register a Client account
+
+Login as Client
+
+View available slots
+
+Create a Booking
+
+Confirm/Cancel/Complete booking
+
+Leave a Review
+
+
 👨‍💻 Author
-Your walidmohamed16 - GitHub       
+
+walidmohamed16 - GitHub
+
+
